@@ -1,14 +1,14 @@
 /* Shared design system for institutions.
-   Academic-journal palette, serif for scholarly prose, sans for interactive UI. */
+   Academic-journal palette, serif for headings, sans for body copy and UI. */
 
 :root {
-  --bg: #fbfbfa;
-  --bg-alt: #f2f3f5;
+  --bg: #fbfaf8;
+  --bg-alt: #f4f2ee;
   --bg-card: #ffffff;
-  --text: #1a1d23;
-  --text-muted: #5c6270;
-  --border: #dfe2e8;
-  --border-strong: #8b93a1;
+  --text: #1c1b19;
+  --text-muted: #6b6862;
+  --border: #e3dfd7;
+  --border-strong: #cdc7bb;
   --accent: #2f5f8a;
   --accent-soft: #e8eef4;
   --link: #2f5f8a;
@@ -27,20 +27,29 @@
   --dot-stroke: rgba(26, 29, 35, 0.25);
   --chart-2: #152b47;
   --chart-bar: #152b47;
-  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  --text-tiny: 0.75rem;
+  --text-small: 0.875rem;
+  --text-body: 1rem;
+  --text-lede: 1.125rem;
+  --text-h4: 1rem;
+  --text-h3: 1.125rem;
+  --text-h2: 1.5rem;
+  --text-h1: 2rem;
+  --text-display: clamp(2.25rem, 4vw + 1.25rem, 3.5rem);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #14161a;
-    --bg-alt: #1b1e24;
-    --bg-card: #1e2127;
-    --text: #e7e9ed;
-    --text-muted: #9aa1b0;
-    --border: #333844;
-    --border-strong: #78849c;
+    --bg: #14140f;
+    --bg-alt: #24241f;
+    --bg-card: #1c1c18;
+    --text: #eceae4;
+    --text-muted: #a8a49a;
+    --border: #32322b;
+    --border-strong: #45443c;
     --accent: #7fb4e0;
     --accent-soft: #1d2a36;
     --link: #7fb4e0;
@@ -62,13 +71,13 @@
 }
 
 :root[data-theme="dark"] {
-  --bg: #14161a;
-  --bg-alt: #1b1e24;
-  --bg-card: #1e2127;
-  --text: #e7e9ed;
-  --text-muted: #9aa1b0;
-  --border: #333844;
-  --border-strong: #78849c;
+  --bg: #14140f;
+  --bg-alt: #24241f;
+  --bg-card: #1c1c18;
+  --text: #eceae4;
+  --text-muted: #a8a49a;
+  --border: #32322b;
+  --border-strong: #45443c;
   --accent: #7fb4e0;
   --accent-soft: #1d2a36;
   --link: #7fb4e0;
@@ -108,9 +117,9 @@ body {
   overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--serif);
-  font-size: 1.08rem;
-  line-height: 1.65;
+  font-family: var(--sans);
+  font-size: var(--text-body);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -129,9 +138,9 @@ h1, h2, h3, h4 {
   letter-spacing: -0.01em;
 }
 
-h1 { font-size: 2.1rem; margin: 0 0 0.4rem; }
-h2 { font-size: 1.5rem; margin: 2.4rem 0 0.8rem; }
-h3 { font-size: 1.15rem; margin: 1.6rem 0 0.6rem; }
+h1 { font-size: var(--text-h1); margin: 0 0 0.4rem; }
+h2 { font-size: var(--text-h2); margin: 2.4rem 0 0.8rem; }
+h3 { font-size: var(--text-h3); margin: 1.6rem 0 0.6rem; }
 
 p { margin: 0 0 1.1rem; }
 
@@ -169,7 +178,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .skip-link:focus { left: 0; }
 
 .lede {
-  font-size: 1.18rem;
+  font-size: var(--text-lede);
   color: var(--text-muted);
 }
 
