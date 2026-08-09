@@ -1,7 +1,7 @@
 "use strict";
 /*
  * Illustrative agent-based model of an exit-voice-loyalty decline spiral.
- * Not a validated empirical model — see the epistemic note on the page.
+ * Not a validated empirical model; see the epistemic note on the page.
  */
 
 const GRID = 10;

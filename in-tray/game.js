@@ -1,6 +1,6 @@
 "use strict";
 /*
- * The In-Tray — a playable model of deferral incentives.
+ * The In-Tray: a playable model of deferral incentives.
  * All dossiers below are synthetic/illustrative, not drawn from real case files.
  * Hidden payoff structure by design: the player discovers it by playing.
  */
@@ -176,8 +176,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const t = templateById(d.templateId);
     dossierTitle.textContent = t.title;
     dossierMeta.textContent = d.isReissue
-      ? `Reissue — cycle ${d.cycle} — round ${game.round} of ~${ROUNDS}`
-      : `New — round ${game.round} of ~${ROUNDS}`;
+      ? `Reissue, cycle ${d.cycle}, round ${game.round} of ~${ROUNDS}`
+      : `New, round ${game.round} of ~${ROUNDS}`;
     dossierSummary.textContent = t.summary;
     updateStats();
   }
@@ -239,7 +239,7 @@ window.addEventListener("DOMContentLoaded", () => {
     timelineWrap.innerHTML = "";
     const longest = game.longestChains(2).filter(([, c]) => c.history.length > 0);
     if (longest.length === 0) {
-      timelineWrap.innerHTML = "<p><em>No file in this session was deferred more than once — you approved early and often. Play again and try leaning on Refuse or Request Documents to see a chain form.</em></p>";
+      timelineWrap.innerHTML = "<p><em>No file in this session was deferred more than once: you approved early and often. Play again and try leaning on Refuse or Request Documents to see a chain form.</em></p>";
     }
     for (const [templateId, chain] of longest) {
       const t = templateById(templateId);
@@ -247,8 +247,8 @@ window.addEventListener("DOMContentLoaded", () => {
       el.className = "card";
       const steps = chain.history.map((h) => `<div class="tl-step"><span class="tl-round">Round ${h.round}</span><span class="tl-action">${actionLabel(h.action)}</span></div><span class="tl-arrow">&rarr;</span>`).join("");
       const finalStep = chain.resolved
-        ? `<div class="tl-step tl-final"><span class="tl-round">Round ${chain.resolvedRound}</span><span class="tl-action">${chain.blamed ? "Approved — later flagged" : "Approved — cleared"}</span></div>`
-        : `<div class="tl-step tl-open"><span class="tl-round">—</span><span class="tl-action">Still open at session end</span></div>`;
+        ? `<div class="tl-step tl-final"><span class="tl-round">Round ${chain.resolvedRound}</span><span class="tl-action">${chain.blamed ? "Approved, later flagged" : "Approved, cleared"}</span></div>`
+        : `<div class="tl-step tl-open"><span class="tl-round">&ndash;</span><span class="tl-action">Still open at session end</span></div>`;
       el.innerHTML = `<h3 style="margin-top:0">${t.title}</h3><div class="timeline">${steps}${finalStep}</div>`;
       timelineWrap.appendChild(el);
     }

@@ -67,5 +67,5 @@ Direct fetches to several academic domains (doi.org, psycnet.apa.org, papers.ssr
 semanticscholar.org) were blocked by this session's network egress policy, so verification
 above relies on search-result snippets and the secondary listings that were reachable
 (publisher catalog pages, Cambridge Core, JSTOR's public index, Internet Archive, Springer
-Nature Link) rather than the primary record in every case. Where that left a genuine gap —
-the Anderson page range — it is disclosed above rather than resolved by guessing.
+Nature Link) rather than the primary record in every case. Where that left a genuine gap,
+namely the Anderson page range, it is disclosed above rather than resolved by guessing.
