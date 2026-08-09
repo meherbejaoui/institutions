@@ -105,18 +105,18 @@
       <div class="card">
         <canvas id="agents-canvas" role="img" aria-label="Grid of 100 agents colored by trust level" style="width:100%; height:280px;"></canvas>
         <div class="legend">
-          <span><span class="dot" style="background:var(--dot-high)"></span>high trust</span>
-          <span><span class="dot" style="background:var(--dot-low)"></span>low trust</span>
-          <span><span class="dot" style="background:var(--dot-exited); opacity:.6"></span>exited</span>
-          <span><span class="dot" style="border:2px solid var(--dot-ring); background:transparent"></span>voiced this round</span>
+          <span><span class="dot" style="background:var(--dot-high)"></span>high trust<span class="info-tip" tabindex="0" aria-label="High trust: this agent's trust in the institution is still relatively intact."><span aria-hidden="true">?</span><span class="tip-text" aria-hidden="true">This agent's trust in the institution is still relatively intact.</span></span></span>
+          <span><span class="dot" style="background:var(--dot-low)"></span>low trust<span class="info-tip" tabindex="0" aria-label="Low trust: this agent's trust has drained close to the point of leaving or speaking up."><span aria-hidden="true">?</span><span class="tip-text" aria-hidden="true">This agent's trust has drained close to the point of leaving or speaking up.</span></span></span>
+          <span><span class="dot" style="background:var(--dot-exited); opacity:.6"></span>exited<span class="info-tip" tabindex="0" aria-label="Exited: this agent left the institution once trust ran out and an outside option was available."><span aria-hidden="true">?</span><span class="tip-text" aria-hidden="true">This agent left the institution once trust ran out and an outside option was available.</span></span></span>
+          <span><span class="dot" style="border:2px solid var(--dot-ring); background:transparent"></span>voiced this round<span class="info-tip" tabindex="0" aria-label="Voiced this round: this agent raised a problem instead of leaving or staying silent."><span aria-hidden="true">?</span><span class="tip-text" aria-hidden="true">This agent raised a problem instead of leaving or staying silent.</span></span></span>
         </div>
       </div>
 
       <div class="card">
         <canvas id="chart-canvas" role="img" aria-label="Line chart of institutional capacity and average trust over time" style="width:100%; height:180px;"></canvas>
         <div class="legend">
-          <span><span class="line" style="border-color:var(--chart-2)"></span>institutional capacity (solid)</span>
-          <span><span class="line dashed" style="border-color:var(--accent)"></span>average trust, remaining (dashed)</span>
+          <span><span class="line" style="border-color:var(--chart-2)"></span>institutional capacity, solid<span class="info-tip" tabindex="0" aria-label="Institutional capacity: the institution's overall ability to self-correct, which falls every time someone exits."><span aria-hidden="true">?</span><span class="tip-text" aria-hidden="true">The institution's overall ability to self-correct, which falls every time someone exits.</span></span></span>
+          <span><span class="line dashed" style="border-color:var(--dot-high)"></span>average trust, dashed<span class="info-tip" tabindex="0" aria-label="Average trust: the average trust level among agents still inside the institution."><span aria-hidden="true">?</span><span class="tip-text" aria-hidden="true">The average trust level among agents still inside the institution.</span></span></span>
         </div>
       </div>
     </div>

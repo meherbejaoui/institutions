@@ -282,7 +282,7 @@ function drawDurationChart(canvas, durations) {
 
   const styles = getComputedStyle(document.documentElement);
   const border = styles.getPropertyValue("--border").trim();
-  const accent = styles.getPropertyValue("--accent").trim();
+  const barColor = styles.getPropertyValue("--chart-bar").trim();
   const muted = styles.getPropertyValue("--text-muted").trim();
 
   const pad = { l: 30, r: 10, t: 10, b: 24 };
@@ -310,10 +310,18 @@ function drawDurationChart(canvas, durations) {
   const maxCount = Math.max(...counts, 1);
   const barW = plotW / buckets;
 
-  ctx.fillStyle = accent;
+  ctx.fillStyle = barColor;
   counts.forEach((c, i) => {
     const bh = (c / maxCount) * plotH;
-    ctx.fillRect(pad.l + i * barW + 2, pad.t + plotH - bh, Math.max(barW - 4, 2), bh);
+    const bx = pad.l + i * barW + 2;
+    const bw = Math.max(barW - 4, 2);
+    const by = pad.t + plotH - bh;
+    if (bh > 0) {
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(bx, by, bw, bh, [3, 3, 0, 0]);
+      else ctx.rect(bx, by, bw, bh);
+      ctx.fill();
+    }
   });
 
   ctx.fillStyle = muted;

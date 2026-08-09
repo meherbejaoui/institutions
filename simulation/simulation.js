@@ -151,6 +151,7 @@ function drawAgents(canvas, sim) {
   const highRgb = hexToRgb(styles.getPropertyValue("--dot-high"));
   const exitedColor = styles.getPropertyValue("--dot-exited").trim();
   const ringColor = styles.getPropertyValue("--dot-ring").trim();
+  const strokeColor = styles.getPropertyValue("--dot-stroke").trim();
 
   const cell = Math.min(w, h) / GRID;
   const r = cell * 0.32;
@@ -162,6 +163,9 @@ function drawAgents(canvas, sim) {
     ctx.fillStyle = trustColor(a, lowRgb, highRgb, exitedColor);
     ctx.globalAlpha = a.exited ? 0.45 : 1;
     ctx.fill();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = strokeColor;
+    ctx.stroke();
     ctx.globalAlpha = 1;
     if (a.lastAction === "voice") {
       ctx.beginPath();
@@ -189,7 +193,7 @@ function drawChart(canvas, sim) {
   const border = styles.getPropertyValue("--border").trim();
   const muted = styles.getPropertyValue("--text-muted").trim();
   const chart2 = styles.getPropertyValue("--chart-2").trim();
-  const accent = styles.getPropertyValue("--accent").trim();
+  const dotHigh = styles.getPropertyValue("--dot-high").trim();
 
   ctx.strokeStyle = border;
   ctx.lineWidth = 1;
@@ -208,7 +212,7 @@ function drawChart(canvas, sim) {
   // so the lines stay distinguishable independent of color vision.
   const series = [
     { key: "capacity", color: chart2, max: 100, dash: [] },
-    { key: "avgTrust", color: accent, max: 100, dash: [6, 4] },
+    { key: "avgTrust", color: dotHigh, max: 100, dash: [6, 4] },
   ];
   const n = sim.history.capacity.length;
   if (n < 2) return;

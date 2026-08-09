@@ -1,3 +1,30 @@
+.hero-stat {
+  text-align: center;
+  padding: 1.8rem 1.5rem;
+  margin-top: 1.6rem;
+}
+.hero-label {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+.hero-value {
+  font-family: var(--mono);
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.15;
+  margin: 0.2rem 0;
+}
+.hero-sub {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
 .start-cta {
   margin: 1.6rem 0 1.8rem;
   display: flex;
@@ -32,8 +59,7 @@
   font-family: var(--sans);
   font-size: 0.95rem;
   background: var(--accent-soft);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--bad);
+  border: 1px solid var(--bad);
   border-radius: var(--radius);
   padding: 0.85rem 1.05rem;
   margin-bottom: 1.2rem;

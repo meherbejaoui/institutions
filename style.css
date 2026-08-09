@@ -20,11 +20,13 @@
   --warn: #8a6a1f;
   --shadow: 0 1px 2px rgba(20, 24, 30, 0.05), 0 4px 14px rgba(20, 24, 30, 0.05);
   --radius: 8px;
-  --dot-low: #d0670a;
-  --dot-high: #2f5f8a;
+  --dot-low: #152b47;
+  --dot-high: #d99a2b;
   --dot-exited: #767676;
   --dot-ring: #1a1d23;
-  --chart-2: #c65a11;
+  --dot-stroke: rgba(26, 29, 35, 0.25);
+  --chart-2: #152b47;
+  --chart-bar: #152b47;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
@@ -49,11 +51,13 @@
     --bad: #e0897a;
     --warn: #d9b661;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 14px rgba(0, 0, 0, 0.3);
-    --dot-low: #f0a94e;
-    --dot-high: #7fb4e0;
+    --dot-low: #3a5a85;
+    --dot-high: #ffd166;
     --dot-exited: #9a9a9a;
     --dot-ring: #e7e9ed;
-    --chart-2: #e0924f;
+    --dot-stroke: rgba(231, 233, 237, 0.3);
+    --chart-2: #3a5a85;
+    --chart-bar: #ffd166;
   }
 }
 
@@ -75,11 +79,13 @@
   --bad: #e0897a;
   --warn: #d9b661;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 14px rgba(0, 0, 0, 0.3);
-  --dot-low: #f0a94e;
-  --dot-high: #7fb4e0;
+  --dot-low: #3a5a85;
+  --dot-high: #ffd166;
   --dot-exited: #9a9a9a;
   --dot-ring: #e7e9ed;
-  --chart-2: #e0924f;
+  --dot-stroke: rgba(231, 233, 237, 0.3);
+  --chart-2: #3a5a85;
+  --chart-bar: #ffd166;
 }
 
 * { box-sizing: border-box; }
@@ -269,25 +275,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .project-card:hover .card-cta { text-decoration: underline; }
 
 .note {
-  position: relative;
   font-family: var(--sans);
   font-size: 0.95rem;
   background: var(--accent-soft);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1rem 1.2rem 1rem 1.5rem;
+  padding: 1rem 1.2rem;
   margin: 1.4rem 0;
   color: var(--text);
-  overflow: hidden;
-}
-.note::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--accent);
 }
 .note strong { color: var(--accent); }
 
