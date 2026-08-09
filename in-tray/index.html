@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The In-Tray — institutions</title>
+<meta name="description" content="A playable desk simulation of why administrative files get deferred instead of decided.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232f5f8a'/%3E%3Crect x='22' y='30' width='14' height='45' fill='white'/%3E%3Crect x='43' y='20' width='14' height='55' fill='white'/%3E%3Crect x='64' y='35' width='14' height='40' fill='white'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="game.css">
+<script src="../theme.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <nav class="site-nav">
+    <a href="https://www.meherbejaoui.com/">meherbejaoui.com</a>
+    <span>/</span>
+    <a href="../">institutions</a>
+    <span>/</span>
+    <a href="./" class="current">in-tray</a>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme"></button>
+  </nav>
+</header>
+<div class="wrap">
+
+  <section id="screen-start">
+    <p class="kicker">Playable · 2 of 3</p>
+    <h1>The In-Tray</h1>
+    <p class="lede">You are the desk officer. Files arrive. You decide.</p>
+    <p>
+      Each file has one paragraph of context and a small, non-disqualifying defect. You have
+      three options: <strong>Approve</strong>, <strong>Refuse</strong>, or
+      <strong>Request Further Documents</strong>. Your score reflects your career — not how
+      many files you clear. Nothing else will be explained in advance; the point is to find
+      out how the incentives work by working the desk.
+    </p>
+    <div class="disclaimer">
+      Every dossier here is synthetic — invented for this game, not drawn from any real case
+      file. The payoff structure it teaches is the argument, detailed after you play in the
+      <a href="#" id="skip-link">debrief</a>.
+    </div>
+    <button id="start-btn" class="primary" type="button">Start your shift</button>
+  </section>
+
+  <section id="screen-play" hidden>
+    <div class="tray-stats">
+      <div><span class="label">Round</span><span class="value" id="play-round">0</span></div>
+      <div><span class="label">Career score</span><span class="value" id="play-score">100</span></div>
+      <div><span class="label">Backlog (refused)</span><span class="value" id="play-backlog">0</span></div>
+      <div><span class="label">Pending (docs requested)</span><span class="value" id="play-pending">0</span></div>
+    </div>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <div class="dossier card">
+      <p class="dossier-meta" id="dossier-meta"></p>
+      <h2 class="dossier-title" id="dossier-title"></h2>
+      <p class="dossier-summary" id="dossier-summary"></p>
+    </div>
+
+    <div class="action-row">
+      <button id="btn-approve" class="primary" type="button">Approve</button>
+      <button id="btn-refuse" type="button">Refuse</button>
+      <button id="btn-docs" type="button">Request Further Documents</button>
+    </div>
+  </section>
+
+  <section id="screen-debrief" hidden>
+    <p class="kicker">Debrief</p>
+    <h1>What you just did</h1>
+    <p class="lede">Your session, turned back into the evidence a researcher would collect.</p>
+
+    <div class="stat-row">
+      <div class="stat"><div class="label">Final career score</div><div class="value" id="d-score">–</div></div>
+      <div class="stat"><div class="label">Files cleared</div><div class="value" id="d-cleared">–</div></div>
+      <div class="stat"><div class="label">Still open</div><div class="value" id="d-open">–</div></div>
+      <div class="stat"><div class="label">Audit flags</div><div class="value" id="d-blamed">–</div></div>
+      <div class="stat"><div class="label">Backlog created</div><div class="value" id="d-backlog">–</div></div>
+      <div class="stat"><div class="label">Docs requested</div><div class="value" id="d-pending">–</div></div>
+    </div>
+
+    <h2>The hidden payoff structure</h2>
+    <p>
+      Nothing above was random noise — every session runs on the same fixed, hidden payoffs.
+      This is what you were actually responding to:
+    </p>
+    <table>
+      <thead><tr><th>Action</th><th>Visible cost now</th><th>Delayed cost</th><th>Resolves the file?</th></tr></thead>
+      <tbody>
+        <tr><td>Approve</td><td>None</td><td>~16–50% chance of an audit flag, scaling with how many times the file was previously deferred</td><td>Yes — permanently</td></tr>
+        <tr><td>Refuse</td><td>Backlog count rises, and a small ambient score drag begins</td><td>File returns in 3–6 rounds, same defect</td><td>No</td></tr>
+        <tr><td>Request Further Documents</td><td>None visible anywhere</td><td>File returns in 2–4 rounds, same defect</td><td>No</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Request Further Documents is not a neutral, cautious option — it is the strictly
+      dominant one under this payoff structure: zero visible cost, no blame exposure, and no
+      backlog attribution. That is the mechanism this game is arguing for: bureaucratic
+      deferral does not require a will to obstruct, only a payoff structure where every
+      individually rational move defers, and where a file can be "in progress" indefinitely
+      without anyone being at fault for it. It formalizes the logic Christopher Hood
+      describes as blame avoidance and Christopher Anderson's decision-avoidance account of
+      choice deferral — see the <a href="../reading-map/">reading map</a> for both, and for
+      where this differs from a claim that officials are lazy or malicious.
+    </p>
+
+    <h2>Your deferral chains</h2>
+    <p>The files you personally deferred more than once, reconstructed as timelines:</p>
+    <div id="d-timelines"></div>
+
+    <h2>Time to resolution</h2>
+    <p>How many rounds cleared files spent open, first appearance to final approval — the same measure a researcher would compute as a survival/duration curve over real administrative records:</p>
+    <div class="card"><canvas id="d-chart" style="width:100%; height:160px;"></canvas></div>
+
+    <div class="disclaimer">
+      <strong>Epistemic status.</strong> This game demonstrates a payoff structure's logic; it
+      does not measure a real institution. The probabilities are designed to make the
+      incentive gradient legible in fifteen rounds, not calibrated to any dataset. What would
+      make this an empirical claim rather than a demonstration is exactly what a PhD is for:
+      coding real dated document sequences the way <a href="../simulation/">the decline
+      simulation</a>'s companion piece describes, and testing whether the same asymmetry holds.
+    </div>
+
+    <button id="replay-btn" type="button">Play again</button>
+    <p class="back-link" style="margin-top:1.5rem;"><a href="../">&larr; Back to institutions</a></p>
+  </section>
+
+</div>
+<script src="game.js"></script>
+<script>
+  document.getElementById("skip-link").addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("screen-start").hidden = true;
+    document.getElementById("screen-debrief").hidden = false;
+    document.getElementById("d-timelines").innerHTML = "<p><em>Play a session first to generate your own debrief — this link just previews where it lands.</em></p>";
+  });
+</script>
+</body>
+</html>
