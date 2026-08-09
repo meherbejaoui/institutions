@@ -19,6 +19,11 @@
   --warn: #8a6a1f;
   --shadow: 0 1px 2px rgba(20, 24, 30, 0.05), 0 4px 14px rgba(20, 24, 30, 0.05);
   --radius: 8px;
+  --dot-low: #d0670a;
+  --dot-high: #2f5f8a;
+  --dot-exited: #767676;
+  --dot-ring: #1a1d23;
+  --chart-2: #c65a11;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
@@ -42,6 +47,11 @@
     --bad: #e0897a;
     --warn: #d9b661;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 14px rgba(0, 0, 0, 0.3);
+    --dot-low: #f0a94e;
+    --dot-high: #7fb4e0;
+    --dot-exited: #9a9a9a;
+    --dot-ring: #e7e9ed;
+    --chart-2: #e0924f;
   }
 }
 
@@ -62,6 +72,11 @@
   --bad: #e0897a;
   --warn: #d9b661;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 14px rgba(0, 0, 0, 0.3);
+  --dot-low: #f0a94e;
+  --dot-high: #7fb4e0;
+  --dot-exited: #9a9a9a;
+  --dot-ring: #e7e9ed;
+  --chart-2: #e0924f;
 }
 
 * { box-sizing: border-box; }
@@ -433,6 +448,8 @@ input[type="range"] { width: 100%; accent-color: var(--accent); min-height: 24px
 
 .legend { font-family: var(--sans); font-size: 0.88rem; color: var(--text-muted); display: flex; gap: 1.1rem; flex-wrap: wrap; margin: 0.6rem 0 1.2rem; }
 .legend .dot { display: inline-block; width: 0.7em; height: 0.7em; border-radius: 50%; margin-right: 0.35em; vertical-align: -0.05em; }
+.legend .line { display: inline-block; width: 1.5em; height: 0; border-top-width: 3px; border-top-style: solid; margin-right: 0.4em; vertical-align: 0.2em; }
+.legend .line.dashed { border-top-style: dashed; }
 
 .frame-card { margin: 1.8rem 0; padding: 1.6rem 1.8rem; }
 .frame-card .cite { font-family: var(--sans); font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.9rem; }

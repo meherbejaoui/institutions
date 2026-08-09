@@ -103,18 +103,18 @@
       <div class="card">
         <canvas id="agents-canvas" role="img" aria-label="Grid of 100 agents colored by trust level" style="width:100%; height:280px;"></canvas>
         <div class="legend">
-          <span><span class="dot" style="background:rgb(120,180,140)"></span>high trust</span>
-          <span><span class="dot" style="background:rgb(180,90,90)"></span>low trust</span>
-          <span><span class="dot" style="background:#9a9186; opacity:.6"></span>exited</span>
-          <span><span class="dot" style="border:2px solid var(--accent); background:transparent"></span>voiced this round</span>
+          <span><span class="dot" style="background:var(--dot-high)"></span>high trust</span>
+          <span><span class="dot" style="background:var(--dot-low)"></span>low trust</span>
+          <span><span class="dot" style="background:var(--dot-exited); opacity:.6"></span>exited</span>
+          <span><span class="dot" style="border:2px solid var(--dot-ring); background:transparent"></span>voiced this round</span>
         </div>
       </div>
 
       <div class="card">
         <canvas id="chart-canvas" role="img" aria-label="Line chart of institutional capacity and average trust over time" style="width:100%; height:180px;"></canvas>
         <div class="legend">
-          <span><span class="dot" style="background:#7a2e2e"></span>institutional capacity</span>
-          <span><span class="dot" style="background:var(--accent)"></span>average trust (remaining)</span>
+          <span><span class="line" style="border-color:var(--chart-2)"></span>institutional capacity (solid)</span>
+          <span><span class="line dashed" style="border-color:var(--accent)"></span>average trust, remaining (dashed)</span>
         </div>
       </div>
     </div>

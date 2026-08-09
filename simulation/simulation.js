@@ -118,13 +118,22 @@ function clamp(x, lo, hi) { return Math.max(lo, Math.min(hi, x)); }
 
 // ---------- rendering ----------
 
-function trustColor(a) {
-  if (a.exited) return "#9a9186";
+function hexToRgb(hex) {
+  hex = hex.trim().replace("#", "");
+  if (hex.length === 3) hex = hex.split("").map((c) => c + c).join("");
+  const num = parseInt(hex, 16);
+  return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+}
+
+// Colorblind-safe diverging scale (Okabe-Ito orange -> blue) instead of
+// a red/green gradient, which is indistinguishable under most forms of
+// color vision deficiency.
+function trustColor(a, low, high, exitedColor) {
+  if (a.exited) return exitedColor;
   const t = a.trust / 100;
-  // low trust -> muted red/orange, high trust -> deep teal/green
-  const r = Math.round(180 - t * 60);
-  const g = Math.round(70 + t * 110);
-  const b = Math.round(70 + t * 70);
+  const r = Math.round(low[0] + (high[0] - low[0]) * t);
+  const g = Math.round(low[1] + (high[1] - low[1]) * t);
+  const b = Math.round(low[2] + (high[2] - low[2]) * t);
   return `rgb(${r},${g},${b})`;
 }
 
@@ -137,6 +146,12 @@ function drawAgents(canvas, sim) {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, w, h);
 
+  const styles = getComputedStyle(document.documentElement);
+  const lowRgb = hexToRgb(styles.getPropertyValue("--dot-low"));
+  const highRgb = hexToRgb(styles.getPropertyValue("--dot-high"));
+  const exitedColor = styles.getPropertyValue("--dot-exited").trim();
+  const ringColor = styles.getPropertyValue("--dot-ring").trim();
+
   const cell = Math.min(w, h) / GRID;
   const r = cell * 0.32;
   for (const a of sim.agents) {
@@ -144,15 +159,15 @@ function drawAgents(canvas, sim) {
     const cy = Math.floor(a.id / GRID) * cell + cell / 2;
     ctx.beginPath();
     ctx.arc(cx, cy, a.exited ? r * 0.55 : r, 0, Math.PI * 2);
-    ctx.fillStyle = trustColor(a);
-    ctx.globalAlpha = a.exited ? 0.35 : 1;
+    ctx.fillStyle = trustColor(a, lowRgb, highRgb, exitedColor);
+    ctx.globalAlpha = a.exited ? 0.45 : 1;
     ctx.fill();
     ctx.globalAlpha = 1;
     if (a.lastAction === "voice") {
       ctx.beginPath();
       ctx.arc(cx, cy, r * 1.35, 0, Math.PI * 2);
-      ctx.strokeStyle = "#2f5f8a";
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = ringColor;
+      ctx.lineWidth = 2.5;
       ctx.stroke();
     }
   }
@@ -173,6 +188,8 @@ function drawChart(canvas, sim) {
   const styles = getComputedStyle(document.documentElement);
   const border = styles.getPropertyValue("--border").trim();
   const muted = styles.getPropertyValue("--text-muted").trim();
+  const chart2 = styles.getPropertyValue("--chart-2").trim();
+  const accent = styles.getPropertyValue("--accent").trim();
 
   ctx.strokeStyle = border;
   ctx.lineWidth = 1;
@@ -187,29 +204,29 @@ function drawChart(canvas, sim) {
   ctx.fillText("100", 2, pad.t + 4);
   ctx.fillText("0", 10, pad.t + plotH + 4);
 
+  // Dash pattern is a second, non-color encoding for the two series,
+  // so the lines stay distinguishable independent of color vision.
   const series = [
-    { key: "capacity", color: "#7a2e2e", max: 100 },
-    { key: "avgTrust", color: "#2f5f8a", max: 100 },
+    { key: "capacity", color: chart2, max: 100, dash: [] },
+    { key: "avgTrust", color: accent, max: 100, dash: [6, 4] },
   ];
   const n = sim.history.capacity.length;
   if (n < 2) return;
-  const xAt = (i) => pad.l + (i / (MAX_HISTORY - 1)) * plotW * (n / MAX_HISTORY) * (MAX_HISTORY / Math.max(n, 1)) ;
-  // simpler: map index across available window
-  const startIdx = Math.max(0, n - MAX_HISTORY);
-  const visible = n;
-  const xFor = (i) => pad.l + (i / Math.max(visible - 1, 1)) * plotW;
+  const xFor = (i) => pad.l + (i / Math.max(n - 1, 1)) * plotW;
 
   for (const s of series) {
     const data = sim.history[s.key];
     ctx.beginPath();
     ctx.strokeStyle = s.color;
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash(s.dash);
     for (let i = 0; i < data.length; i++) {
       const x = xFor(i);
       const y = pad.t + plotH - (data[i] / s.max) * plotH;
       if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     }
     ctx.stroke();
+    ctx.setLineDash([]);
   }
 }
 
