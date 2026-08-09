@@ -61,19 +61,31 @@
       </label>
 
       <div class="control-row">
-        <label for="declinePressure">Systemic decline pressure <output id="declinePressure-out">1</output></label>
+        <label for="declinePressure">
+          <span class="label-text">Systemic decline pressure<span class="info-tip" tabindex="0" aria-label="Systemic decline pressure: how fast trust erodes institution-wide each round, independent of any single person's choices."><span aria-hidden="true">?</span><span class="tip-text" aria-hidden="true">How fast trust erodes institution-wide each round, independent of any single person's choices.</span></span></span>
+          <output id="declinePressure-out">1</output>
+        </label>
         <input type="range" id="declinePressure" min="0.2" max="3" step="0.1" value="1">
       </div>
       <div class="control-row">
-        <label for="responsiveness">Responsiveness to voice <output id="responsiveness-out">40%</output></label>
+        <label for="responsiveness">
+          <span class="label-text">Responsiveness to voice<span class="info-tip" tabindex="0" aria-label="Responsiveness to voice: the chance that raising a problem actually leads to a fix, rather than being ignored."><span aria-hidden="true">?</span><span class="tip-text" aria-hidden="true">The chance that raising a problem actually leads to a fix, rather than being ignored.</span></span></span>
+          <output id="responsiveness-out">40%</output>
+        </label>
         <input type="range" id="responsiveness" min="0" max="1" step="0.05" value="0.4">
       </div>
       <div class="control-row">
-        <label for="outsideOptions">Share with an outside option <output id="outsideOptions-out">50%</output></label>
+        <label for="outsideOptions">
+          <span class="label-text">Share with an outside option<span class="info-tip" tabindex="0" aria-label="Share with an outside option: the fraction of people who could realistically leave for something else if they wanted to."><span aria-hidden="true">?</span><span class="tip-text" aria-hidden="true">The fraction of people who could realistically leave for something else if they wanted to.</span></span></span>
+          <output id="outsideOptions-out">50%</output>
+        </label>
         <input type="range" id="outsideOptions" min="0" max="1" step="0.05" value="0.5">
       </div>
       <div class="control-row" style="margin-bottom:0;">
-        <label for="initialTrust">Starting trust <output id="initialTrust-out">75</output></label>
+        <label for="initialTrust">
+          <span class="label-text">Starting trust<span class="info-tip" tabindex="0" aria-label="Starting trust: how much trust everyone begins with, before any decline happens."><span aria-hidden="true">?</span><span class="tip-text" aria-hidden="true">How much trust everyone begins with, before any decline happens.</span></span></span>
+          <output id="initialTrust-out">75</output>
+        </label>
         <input type="range" id="initialTrust" min="30" max="95" step="1" value="75">
       </div>
     </div>

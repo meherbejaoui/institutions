@@ -234,16 +234,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .project-card:hover .card-cta { text-decoration: underline; }
 
 .note {
+  position: relative;
   font-family: var(--sans);
   font-size: 0.95rem;
   background: var(--accent-soft);
   border: 1px solid var(--border);
-  border-left: 4px solid var(--accent);
   border-radius: var(--radius);
-  padding: 1rem 1.2rem;
+  padding: 1rem 1.2rem 1rem 1.5rem;
   margin: 1.4rem 0;
   color: var(--text);
-  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.note::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
 }
 .note strong { color: var(--accent); }
 
@@ -289,13 +298,81 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 .control-row label {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   font-size: 0.92rem;
   font-weight: 600;
   color: var(--text);
   margin-bottom: 0.35rem;
 }
-.control-row output { color: var(--accent); font-weight: 700; font-family: var(--mono); }
+.control-row .label-text { display: inline-flex; align-items: center; }
+.control-row output { color: var(--accent); font-weight: 700; font-family: var(--mono); flex-shrink: 0; margin-left: 0.6rem; }
 input[type="range"] { width: 100%; accent-color: var(--accent); min-height: 24px; }
+
+.info-tip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--bg-card);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--sans);
+  cursor: help;
+  margin-left: 0.4rem;
+  flex-shrink: 0;
+}
+.info-tip:hover, .info-tip:focus, .info-tip:focus-visible { background: var(--accent); outline: none; }
+.info-tip .tip-text {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  bottom: 130%;
+  transform: translateY(4px);
+  width: 210px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.4;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  text-align: left;
+  white-space: normal;
+}
+.info-tip::after {
+  content: "";
+  position: absolute;
+  z-index: 20;
+  bottom: 130%;
+  left: 6px;
+  width: 9px;
+  height: 9px;
+  background: var(--text);
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  transform: translateY(9px) rotate(45deg);
+}
+.info-tip:hover .tip-text,
+.info-tip:focus .tip-text,
+.info-tip:focus-visible .tip-text {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+.info-tip:hover::after,
+.info-tip:focus::after,
+.info-tip:focus-visible::after {
+  opacity: 1;
+}
 
 .sim-layout {
   display: grid;
