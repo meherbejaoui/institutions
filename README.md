@@ -62,4 +62,7 @@ then open `http://localhost:8000/`.
 
 ## License
 
-Code and content © Meher Bejaoui, all rights reserved unless stated otherwise.
+This repository is dual-licensed. Code (HTML, CSS, and JavaScript) is
+licensed under [GPLv3](LICENSE). Written content (this README,
+[`REFERENCES.md`](REFERENCES.md), and the in-page prose across the site) is
+licensed under [CC BY-NC-SA 4.0](LICENSE-CONTENT.md).
