@@ -262,6 +262,13 @@ window.addEventListener("DOMContentLoaded", () => {
     debriefScreen.hidden = true;
     startScreen.hidden = false;
   });
+
+  document.getElementById("preview-debrief-link").addEventListener("click", (e) => {
+    e.preventDefault();
+    startScreen.hidden = true;
+    debriefScreen.hidden = false;
+    document.getElementById("d-timelines").innerHTML = "<p><em>Play a session first to generate your own debrief; this link just previews where it lands.</em></p>";
+  });
 });
 
 function drawDurationChart(canvas, durations) {
